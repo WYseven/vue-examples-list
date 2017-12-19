@@ -19,5 +19,12 @@ export const examplesList = [
     name: 'shop-car',
     title: '购物车',
     component: () => import('@/views/examples_dir/tab/tab')
+  },
+  // 选项卡的路由配置
+  {
+    path: 'banyungong',
+    name: 'banyungong',
+    title: '文字搬运工',
+    component: () => import('@/views/examples_dir/banyungong/banyungong')
   }
 ]
