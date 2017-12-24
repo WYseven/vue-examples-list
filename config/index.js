@@ -4,6 +4,22 @@
 
 const path = require('path')
 
+// 获取本机的ip地址
+let getIp = function(){
+  var os = require('os');
+  var interfaces = os.networkInterfaces();
+  var IPv4 = '127.0.0.1';
+  for (var key in interfaces) {
+    var alias = 0;
+    interfaces[key].forEach(function(details){
+      if (details.family == 'IPv4' && key == 'en0'  ) {
+          IPv4 = details.address;
+      }
+    });
+  }
+  return IPv4;
+}
+
 module.exports = {
   dev: {
 
@@ -13,7 +29,7 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: '192.168.3.92', // can be overwritten by process.env.HOST
+    host: getIp(), // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
