@@ -4,8 +4,8 @@
     :active-name="$route.name"  
     @on-select="changeMenu"
     :open-names="openNames"
+    style="width: 100%;"
   >
-
     <template v-for="item in menuList" v-if="item.name">
       <MenuItem 
         name="1" 
@@ -16,8 +16,8 @@
           <Icon type="ios-paper"></Icon>
           {{item.title}}
       </MenuItem>
-      <Submenu 
-        name="1" 
+      <Submenu
+        name="1"
         v-if="item.children.length >= 1" 
         :name="item.name"
       >

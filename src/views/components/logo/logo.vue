@@ -9,15 +9,14 @@
         <div class="text">
           <img src="./imags/miaov-cn.png" style="top: 0px;">
         </div>
-        <div class="logoAll" style="opacity: 1;"></div>
-        <span style="left: 270px;"></span>
       </div>
     </a>
   </h1>
 </template>
 <style scoped>
 .logo {
-  width: 249px;
+  width: 100%;
+  overflow: hidden;
   height: 131px;
   border-bottom: 1px solid #fff;
 }
@@ -25,8 +24,7 @@
   transition: all .1s;
 }
 .logo .logoText {
-  width: 170px;
-  height: 100%;
+  width: 160px;
   position: absolute;
   top: 0;
   left: 0;
@@ -47,7 +45,7 @@
   position: absolute;
 }
 .logo .logoText .logoAll {
-  width: 169px;
+  width: 159px;
   height: 69px;
   top: -69px;
   background: url(./imags/miaov-all.png);
