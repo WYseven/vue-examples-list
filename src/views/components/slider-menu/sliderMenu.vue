@@ -6,7 +6,7 @@
     :open-names="openNames"
   >
 
-    <template v-for="item in menuList">
+    <template v-for="item in menuList" v-if="item.name">
       <MenuItem 
         name="1" 
         v-if="item.children.length < 1" 
@@ -28,6 +28,7 @@
           <MenuItem 
             :name="child.name"
             v-for="child in item.children"
+            v-if="child.name"
             :key="child.name+'1'"
           >
             <Icon :type="child.icon" :key="child.name+'2'"></Icon>
@@ -49,7 +50,6 @@ export default {
   },
   methods: {
     changeMenu (active) {
-      console.log(active)
       this.$emit('on-change',active)
     }
   }

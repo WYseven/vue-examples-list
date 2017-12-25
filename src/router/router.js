@@ -5,11 +5,18 @@ import {examplesList} from './examplesList'
 
 export const appRouter = [
   {
-    path:'/examples',
+    path:'/base-examples',
     title: '基础示例',
-    name:'examples',
+    name:'base-examples',
     component: Main,
-    children: examplesList
+    children: [
+      {
+        path: '',
+        name: '',
+        component: Main
+      },
+      ...examplesList
+    ]
   }
 ]
 

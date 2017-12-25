@@ -15,7 +15,6 @@
     </div>
     <div class="single-page-con" style="left:240px;">
         <div class="single-page">
-            
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>
@@ -31,7 +30,7 @@ export default {
   data () {
     return {
       menuList: appRouter,
-      openNamesArr : ['examples']
+      openNamesArr : [appRouter[0].name]
     }
   },
   methods: {
