@@ -33,7 +33,7 @@ export default {
 .wrap {
 	width: 384px;
 	height: 707px;
-	background: url(./imgs/bg1.png) no-repeat center center;
+	/*background: url(./imgs/bg1.png) no-repeat center center;*/
 	margin: 0 auto;
 	position: relative;
 }

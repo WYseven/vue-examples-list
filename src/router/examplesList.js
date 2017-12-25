@@ -6,19 +6,19 @@ export const examplesList = [
     title: '选项卡',
     component: () => import('@/views/examples_dir/tab/tab')
   },
-  // 选项卡的路由配置
+  // 商品列表的路由配置
   {
     path: 'qq-friends',
     name: 'qq-friends',
     title: '好友列表',
     component: () => import('@/views/examples_dir/qq-friends/qqFriends')
   },
-  // 选项卡的路由配置
+  // 购物车路由配置
   {
     path: 'shop-car',
     name: 'shop-car',
     title: '购物车',
-    component: () => import('@/views/examples_dir/tab/tab')
+    component: () => import('@/views/examples_dir/shop-car/shopCar')
   },
   // todolist的路由配置
   {
