@@ -19,13 +19,13 @@
       <div class="tab-header">
         <div class="tab-item" 
           :class='{"tab-active": indexTwo === i}' 
-          :key="i" v-for="item,i in data"
+          :key="item.title" v-for="(item,i) in data"
         >{{item.title}}</div>
       </div>
       
       <div class="tab-content">
-        <div :style="{display:i === indexTwo ? 'block' : ''}" :key="i" v-for="item,i in data">
-          <p :key="j" v-for="option,j in item.list">{{option.subTitle}}</p>
+        <div :style="{display:i === indexTwo ? 'block' : ''}" :key="item.title" v-for="(item,i) in data">
+          <p :key="j" v-for="(option,j) in item.list">{{option.subTitle}}</p>
         </div>
       </div>
     </div>
@@ -84,7 +84,6 @@ export default {
   beforeRouteEnter (to,from,next) {
     next((vm) => {
       vm.timer = setInterval(() => {
-        console.log(11111)
         vm.indexTwo++;
         if(vm.indexTwo >= vm.data.length){
           vm.indexTwo = 0;

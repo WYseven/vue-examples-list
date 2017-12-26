@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       menuList: appRouter,
-      openNamesArr : [appRouter[0].name]
+      openNamesArr : ['base-examples']  // 默认打开的
     }
   },
   methods: {

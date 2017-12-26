@@ -1,38 +1,78 @@
 <template>
   <div class="wrap">
     <div class="list">
-      <h2><span></span>我的好友</h2>
-      <ul>
-        <li>小佳Love</li>
-        <li>从来就是这么正经</li>
-        <li>leo是个胖子</li>
-        <li>momo不是陌陌</li>
-      </ul>
-      <h2><span></span>企业好友</h2>
-      <ul>
-        <li>习近平</li>
-        <li>普京</li>
-        <li>奥巴马</li>
-      </ul>
-      <h2><span></span>黑名单</h2>
-      <ul>
-        <li>安倍</li>
-        <li>杜特尔特</li>
-      </ul>
+			<h2>只能打开一个菜单</h2>
+      <div class="item" v-for="(item,i) in data" :key="item.title">
+				<h2 @click="openMenuOne(i)" :class="{active: indexOne === i}"><span></span>{{item.title}}</h2>
+				<ul :class="{show: indexOne === i}">
+					<li v-for="option in item.list" :key="option.subTitle">{{option.subTitle}}</li>
+				</ul>
+			</div>
+    </div>
+		<div class="list list-two">
+			<h2>可以打开多个菜单</h2>
+      <div class="item" v-for="(item,i) in data" :key="item.title">
+				<h2 @click="openMenuTwo(i)" :class="{active: item.checked}"><span></span>{{item.title}}</h2>
+				<ul :class="{show: item.checked}">
+					<li v-for="option in item.list" :key="option.subTitle">{{option.subTitle}}</li>
+				</ul>
+			</div>
     </div>
   </div>
 </template>
 
 <script>
+let qqData = [
+  {
+    title: '我的好友',
+    list: [
+      {
+        subTitle: '张国荣'
+      },
+      {
+        subTitle: '周杰伦'
+      },
+      {
+        subTitle: '王杰'
+      }
+    ]
+  },
+  {
+    title: '我的同事',
+    list: [
+      {
+        subTitle: '莫莫'
+			},
+			{
+        subTitle: '多多'
+			},
+			{
+        subTitle: 'leo'
+      }
+    ]
+  }
+]
 export default {
-  
+  data () {
+		return {
+			data: qqData,
+			indexOne: 0
+		}
+	},
+	methods: {
+		openMenuOne (index) {
+			this.indexOne = this.indexOne === index ? '' : index;
+		},
+		openMenuTwo (index) {
+			this.$set(this.data[index],'checked',!this.data[index].checked)
+		}
+	}
 }
 </script>
 <style scoped>
 
 .wrap {
-	width: 384px;
-	height: 707px;
+	width: 584px;
 	/*background: url(./imgs/bg1.png) no-repeat center center;*/
 	margin: 0 auto;
 	position: relative;
@@ -41,8 +81,11 @@ export default {
 .list {
 	width: 280px;
 	position: absolute;
-	left: 46px;
+	left: 0px;
 	top: 64px;
+}
+.list-two {
+	left: 346px;
 }
 .list h2 {
 	height: 48px;
@@ -69,7 +112,7 @@ export default {
 	position: relative;
 	top: 1px;
 }
-.list span.active {
+.list .active span {
 	width: 0;
 	height: 0;
 	display: inline-block;
@@ -83,6 +126,9 @@ export default {
 	color: #fff;
 	display: none;
 }
+.list ul.show {
+	display: block;
+}
 .list li {
 	height: 40px;
 	font: 14px/40px "微软雅黑";
@@ -90,6 +136,10 @@ export default {
 	padding-left: 34px;
 }
 .list li.active {
+	background: rgba(255,255,255,.4);
+}
+
+.list li:hover {
 	background: rgba(255,255,255,.4);
 }
 
