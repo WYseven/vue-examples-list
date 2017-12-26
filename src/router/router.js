@@ -1,7 +1,18 @@
 
 import Main from '@/views/main'
+import CarList from '@/views/examples_dir/examples-car-list/carList'
 
 import {examplesList} from './examplesList'
+
+import Login from '@/views/components/login/login'
+
+// 登录路由配置
+
+const loginRoute = {
+  path: '/login',
+  name: 'login',
+  component: Login
+}
 
 export const appRouter = [
   {
@@ -12,8 +23,8 @@ export const appRouter = [
     children: [
       {
         path: '',
-        name: '',
-        component: Main
+        //name: 'base-examples',
+        component: CarList
       },
       ...examplesList
     ]
@@ -21,6 +32,7 @@ export const appRouter = [
 ]
 
 export const routers = [
+  loginRoute,
   ...appRouter
 ]
 
