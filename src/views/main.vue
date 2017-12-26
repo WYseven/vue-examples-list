@@ -11,9 +11,28 @@
         ></slider-menu>
       </div>
     </div>
-    <!--<div class="main-header-con" :style="{paddingLeft: '240px'}">
-      <div class="main-header"></div>
-    </div> -->
+    <div class="main-header-con" :style="{paddingLeft: '240px'}">
+      <div class="main-header">
+        <div class="header-avator-con">
+          <div class="user-dropdown-menu-con">
+              <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
+                  <Dropdown transfer trigger="click">
+                      <a href="javascript:void(0)">
+                          <span class="main-user-name">{{ "userName" }}</span>
+                          <Icon type="arrow-down-b"></Icon>
+                      </a>
+                      <DropdownMenu slot="list">
+                          <DropdownItem name="ownSpace">个人中心</DropdownItem>
+                          <DropdownItem name="ownSpace">项目地址</DropdownItem>
+                          <DropdownItem name="loginout" divided>退出登录</DropdownItem>
+                      </DropdownMenu>
+                  </Dropdown>
+                  <Avatar src="http://img.microbu.com/2012/0220/66068514297553_200x200crop.jpg" style="background: #619fe7;margin-left: 10px;"></Avatar>
+              </Row>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="single-page-con" style="left:240px;">
         <div class="single-page">
             <keep-alive>

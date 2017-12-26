@@ -7,18 +7,16 @@
     style="width: 100%;"
   >
     <template v-for="item in menuList" v-if="item.name">
-      <MenuItem 
-        name="1" 
-        v-if="item.children.length < 1" 
+      <MenuItem
+        v-if="item.children.length <= 1" 
         :name="item.children[0].name" 
         :key="item.name"
       >
-          <Icon type="ios-paper"></Icon>
-          {{item.title}}
+        <Icon type="ios-paper"></Icon>
+        {{item.title}}
       </MenuItem>
       <Submenu
-        name="1"
-        v-if="item.children.length >= 1" 
+        v-if="item.children.length > 1" 
         :name="item.name"
       >
           <template slot="title">

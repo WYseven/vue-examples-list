@@ -16,6 +16,19 @@ const loginRoute = {
 
 export const appRouter = [
   {
+    path:'/user-list',
+    title: '用户列表',
+    name:'user-list',
+    component: Main,
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: () => import('@/views/users-list/userList')
+      }
+    ]
+  },
+  {
     path:'/base-examples',
     title: '基础示例',
     name:'base-examples',
