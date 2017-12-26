@@ -1,18 +1,109 @@
 <template>
-  <div class="tab">
-    <div class="tab-header">
-      <div class="tab-item tab-active">标签一</div>
-      <div class="tab-item">标签二</div>
-      <div class="tab-item">标签三</div>
+  <section>
+    <div class="tab">
+      <div class="tab-header">
+        <div class="tab-item" 
+          :class='{"tab-active": index === i}' 
+          :key="i" v-for="item,i in data"
+          @click="tabClickHandle(i)"
+        >{{item.title}}</div>
+      </div>
+      <div class="tab-content">
+        <div :style="{display:i === index ? 'block' : ''}" :key="i" v-for="item,i in data">
+          <p :key="j" v-for="option,j in item.list">{{option.subTitle}}</p>
+        </div>
+      </div>
     </div>
-    <div class="tab-content">
-      <div style="display:block;">标签一</div>
-      <div>标签二</div>
-      <div>标签三</div>
+    <h3 class="title">自动切换</h3>
+    <div class="tab tab-position">
+      <div class="tab-header">
+        <div class="tab-item" 
+          :class='{"tab-active": indexTwo === i}' 
+          :key="i" v-for="item,i in data"
+        >{{item.title}}</div>
+      </div>
+      
+      <div class="tab-content">
+        <div :style="{display:i === indexTwo ? 'block' : ''}" :key="i" v-for="item,i in data">
+          <p :key="j" v-for="option,j in item.list">{{option.subTitle}}</p>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
-<style lang="less" scoped>
+<script>
+
+let tabData = [
+  {
+    title: '标签一',
+    list: [
+      {
+        subTitle: '标签一'
+      },
+      {
+        subTitle: '标签一'
+      },
+      {
+        subTitle: '标签一'
+      }
+    ]
+  },
+  {
+    title: '标签二',
+    list: [
+      {
+        subTitle: '标签二'
+      }
+    ]
+  },
+  {
+    title: '标签三',
+    list: [
+      {
+        subTitle: '标签三'
+      }
+    ]
+  }
+]
+
+export default {
+  data () {
+    return {
+      data: tabData,
+      index: 0,
+      indexTwo: 0,
+      timer: null,
+      time: 1000
+    }
+  },
+  methods: {
+    tabClickHandle (index) {
+      this.index = index;
+    }
+  },
+  beforeRouteEnter (to,from,next) {
+    next((vm) => {
+      vm.timer = setInterval(() => {
+        console.log(11111)
+        vm.indexTwo++;
+        if(vm.indexTwo >= vm.data.length){
+          vm.indexTwo = 0;
+        }
+      },vm.time)
+    })
+  },
+  beforeRouteLeave (to,from,next) {
+    clearInterval(this.timer)
+    next();
+  }
+}
+</script>
+
+<style scoped>
+.title {
+  width: 500px;
+  margin: 30px auto 30px;
+}
 .tab {
   width: 500px;
   background: #fff;
@@ -44,8 +135,7 @@
   color: #e6451e;
 }
 .tab-content {
-  height: 100px;
-  line-height: 100px;
+  min-height: 100px;
   background: #fff;
 }
 .tab-content div {
@@ -53,6 +143,10 @@
   height: 100%;
   text-align: center;
   display: none;
+}
+.tab-content div p {
+  height: 30px;
+  line-height: 30px;
 }
 </style>
 

@@ -13,7 +13,7 @@
       </div>
       <!--购物车展示商品信息-->
       <div class="list-body">
-        <shop-item-box v-for="n of 20"></shop-item-box>
+        <shop-item-box></shop-item-box>
       </div>
     </div>
     <!--计算价钱的信息-->
