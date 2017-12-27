@@ -51,7 +51,7 @@ export default {
     },
     $route () {
       let filter = this.$route.query.filter
-      this.filterIndent = filter
+      this.filterIndent = this.filterListMethods[filter] ? filter : 'all'
     }
   },
   methods: {
@@ -74,11 +74,7 @@ export default {
   },
   created () {
     let indent = this.$route.query.filter; 
-    if(this.filterListMethods[indent]){
-      this.filterIndent = indent
-    }else{
-      this.filterIndent = 'all'
-    }
+    this.filterIndent = this.filterListMethods[indent] ? indent : 'all'
   },
   components: {
     TodoHeader,
