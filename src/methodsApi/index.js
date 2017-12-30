@@ -12,7 +12,6 @@ function resolve(path){
 }
 
 
-
 export  function loginMethod (data) {
   return axios(resolve('/login'),{
     method: "post",

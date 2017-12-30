@@ -1,7 +1,7 @@
 <template>
   <h1 class="logo">
     <a href="/">
-      <img src="./imags//logo.png" class="logoBg" style="transform: scale(1);">
+      <img src="./imags/logo.png" class="logoBg" style="transform: scale(1);">
       <div class="logoText">
         <div class="text">
           <img src="./imags/miaov.png" style="top: 0px;">

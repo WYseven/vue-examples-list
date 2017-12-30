@@ -51,8 +51,11 @@ export default {
   data () {
     return {
       menuList: appRouter,
-      openNamesArr : ['base-examples']  // 默认打开的
+      openNamesArr : []  // 默认打开的
     }
+  },
+  created () {
+    this.openNamesArr.push(this.$route.matched[0].name); // 设置默认打开的下拉框
   },
   methods: {
     changeMenu (name) {

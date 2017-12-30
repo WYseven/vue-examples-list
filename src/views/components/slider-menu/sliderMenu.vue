@@ -8,15 +8,15 @@
   >
     <template v-for="item in menuList" v-if="item.name">
       <MenuItem
-        v-if="item.children.length <= 1" 
+        v-if="!item.childrenShow" 
         :name="item.children[0].name" 
         :key="item.name"
       >
-        <Icon type="ios-paper"></Icon>
+        <Icon type="ios-paper" :key="item.name"></Icon>
         {{item.title}}
       </MenuItem>
-      <Submenu
-        v-if="item.children.length > 1" 
+      <Submenu :key="item.name"
+        v-if="item.children.length >= 1 && item.childrenShow" 
         :name="item.name"
       >
           <template slot="title">
@@ -26,7 +26,7 @@
           <MenuItem 
             :name="child.name"
             v-for="child in item.children"
-            v-if="child.name"
+            v-show="!child.notShow"
             :key="child.name+'1'"
           >
             <Icon :type="child.icon" :key="child.name+'2'"></Icon>

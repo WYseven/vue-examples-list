@@ -1,3 +1,4 @@
+// 设置基础示例的路由配置
 export const examplesList = [
   // 选项卡的路由配置
   {
@@ -13,6 +14,13 @@ export const examplesList = [
     title: '好友列表',
     component: () => import('@/views/examples_dir/qq-friends/qqFriends')
   },
+  // 穿梭框
+  {
+    path: 'transfer',
+    name: 'transfer',
+    title: '穿梭框',
+    component: () => import('@/views/examples_dir/transfer/transfer')
+  },
   // 购物车路由配置
   {
     path: 'shop-car',
@@ -26,5 +34,16 @@ export const examplesList = [
     name: 'todolist',
     title: 'todolist',
     component: () => import('@/views/examples_dir/todolist/todos')
+  }
+]
+
+
+// 设置第三方API使用的项目示例
+export const thirdPartyList = [
+  {
+    path: 'cn-node',
+    name: 'cn-node',
+    title: 'cnNode接口使用项目',
+    component: () => import('@/views/examples_dir/qq-friends/qqFriends')
   }
 ]

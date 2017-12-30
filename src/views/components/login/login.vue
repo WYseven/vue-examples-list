@@ -70,6 +70,11 @@ export default {
                     }).then((params) => {
                         if(params.data.code === 0){
                             this.$router.push('/base-examples')
+                        }else if(params.data.code === 1) {
+                            this.$Notice.warning({
+                                title: '提醒',
+                                desc: params.data.error_msg
+                            });
                         }
                     })
                 }
