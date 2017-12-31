@@ -1,6 +1,6 @@
 
 import Main from '@/views/main'
-import CarList from '@/views/examples_dir/examples-car-list/carList'
+import CarList from 'examples-dir/examples-car-list/carList'
 
 import {examplesList,thirdPartyList} from './examplesList'
 
