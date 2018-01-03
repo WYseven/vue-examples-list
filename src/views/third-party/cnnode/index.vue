@@ -14,12 +14,12 @@
             </Spin>
         </Col>
       </Row>
-      <Row class="custom" type="flex">
+      <Row class="custom" type="flex" v-for="option in list" :key="option.id">
           <Col span="3" class="one-col">
             <a href="">
               <img src="https://avatars3.githubusercontent.com/u/3118295?v=4&s=120" alt="">
             </a>
-            <span>100/100000</span> 
+            <span>{{option.reply_count}}/{{option.visit_count}}</span> 
             <span class="flag flag-share">置顶</span>
           </Col>
           <Col span="12" offset="1">
@@ -32,6 +32,7 @@
             <span>12小时前</span>
           </Col>
       </Row>
+      
       <Row class="page">
         <Page :total="1000" show-elevator></Page>
       </Row>
@@ -39,6 +40,8 @@
   </div>
 </template>
 <script>
+import {getTopics} from '@/methodsApi/cnnode'
+import contentItem from './contentItem'
 let titles = [
   {
     title: '全部',
@@ -66,11 +69,15 @@ let titles = [
   }
 ]
 export default {
+  components: {
+    contentItem
+  },
   data () {
     return {
       titles,
       tab:'all',
-      avtive: 0
+      avtive: 0,
+      list: {}
     }
   },
   created () {
@@ -86,6 +93,15 @@ export default {
     }
     this.tab = tab;
     this.avtive = tab === 'all' ? 0 : active;
+
+    // 获取数据
+    getTopics({
+      pag:1,
+      limit:20,
+      tab:this.tab
+    }).then((res) => {
+      this.list = res.data.data;
+    })
   }
 }
 </script>
@@ -119,10 +135,15 @@ a {
   width: 100%;
   display: block;
 }
+.page {
+  border-top: 1px solid #ccc;
+  padding: 10px 10px;
+}
 .content {
   background: #fff;
   margin-top: 10px;
 }
+
 .custom {
   padding: 10px 0;
 }
@@ -153,10 +174,6 @@ a {
 }
 .flag-share {
   background: #e5e5e5;
-}
-.page {
-  border-top: 1px solid #ccc;
-  padding: 10px 10px;
 }
 </style>
 

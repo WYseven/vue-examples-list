@@ -4,12 +4,16 @@
       <div class="item-row">
         <!--左侧单选框-->
         <div class="col col-check">  
-          <i class="iconfont icon-checkbox icon-checkbox-selected J_itemCheckbox" >√</i> 
+          <i 
+            class="iconfont icon-checkbox" 
+            :class="{'icon-checkbox-selected': list.checked}" 
+            @click="checkedHandle"
+          >√</i> 
         </div>
         <!--商品图片展示-->
         <div class="col col-img">  
           <a href="//item.mi.com/1161800009.html" target="_blank"> 
-            <img alt="" src="https://i1.mifile.cn/a1/T1SkV_BCd_1RXrhCrK!80x80.jpg" width="80" height="80"> 
+            <img alt="" :src="list.img_url" width="80" height="80"> 
           </a> 
         </div>
 
@@ -18,28 +22,28 @@
           <div class="tags">   
           </div>  
           <h3 class="name">  
-            <a href="//item.mi.com/1161800009.html" target="_blank"> 小米胶囊耳机 黑色 </a>  
+            <a href="javascript:;" target="_blank"> {{list.title}} </a>  
           </h3>      
         </div>
         <!--商品单价-->
-        <div class="col col-price"> 59元 </div>
+        <div class="col col-price"> {{list.price}}元 </div>
         <!--商品数量-->
         <div class="col col-num">  
           <div class="change-goods-num clearfix J_changeGoodsNum"> 
-            <a href="javascript:void(0)" class="J_minus">
+            <a href="javascript:void(0)" class="J_minus" @click="minusHandle">
               <i class="iconfont"></i>
             </a> 
-            <input tyep="text"  value="5"  autocomplete="off" class="goods-num J_goodsNum" />
-            <a href="javascript:void(0)" class="J_plus">
+            <input tyep="text"  v-model="list.count"  autocomplete="off" class="goods-num J_goodsNum" />
+            <a href="javascript:void(0)" class="J_plus" @click="plusHandle">
               <i class="iconfont"></i>
             </a>   
           </div>  
         </div>
         <!--小计-->
-        <div class="col col-total"> 295元 <p class="pre-info">  </p> </div>
+        <div class="col col-total"> {{list.price * list.count}}元 <p class="pre-info">  </p> </div>
         <!--操作-->
         <div class="col col-action"> 
-          <a href="javascript:void(0);" title="删除" class="del">
+          <a href="javascript:void(0);" @click="removeHandle" title="删除" class="del">
             <i class="iconfont"></i>
           </a> 
         </div>
@@ -47,6 +51,56 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    list: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
+  methods: {
+    checkedHandle () {
+     this.$store.commit('car/updataShopListChecked', {id:this.list.id})
+    },
+    minusHandle () {
+
+      if(this.list.count <= 1){
+        this.$Modal.warning({
+          title: '温馨提示',
+          content: '不能少于1件'
+        })
+        return
+      }
+
+      this.$store.commit('car/updataCount', {id:this.list.id,miuns:true})
+    },
+    plusHandle () {
+      if(this.list.count >= this.list.max_count){
+        this.$Modal.warning({
+          title: '温馨提示',
+          content: '不能超过最大购买数'
+        })
+        return
+      }
+      this.$store.commit('car/updataCount', {id:this.list.id})
+    },
+    removeHandle () {
+      this.$Modal.confirm({
+        title: '温馨提示',
+        content: '确定删除吗？',
+        onOk : () => {
+          this.$store.commit('car/removeShoplist', {id:this.list.id})
+        }
+      })
+      
+    }
+  }
+}
+</script>
+
 <style scoped>
  .item-box {
     padding: 15px 26px 15px 0;
@@ -74,7 +128,7 @@
     overflow: hidden;
 }
  .col-name {
-    width: 380px;
+    width: 350px;
 }
  .col-name .name {
     line-height: 1;
@@ -91,6 +145,7 @@
     text-align: right;
     color: #424242;
     font-size: 16px;
+    width: 160px;
 }
  .col-name .name a {
     color: #424242;
@@ -129,7 +184,7 @@
     text-align: center;
 }
  .col-total {
-    width: 120px;
+    width: 180px;
     padding-right: 55px;
     text-align: right;
     color: #ff6700;
