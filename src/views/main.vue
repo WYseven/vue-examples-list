@@ -18,11 +18,10 @@
               <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
                   <Dropdown transfer trigger="click">
                       <a href="javascript:void(0)">
-                          <span class="main-user-name">{{ "userName" }}</span>
+                          <span class="main-user-name">{{ username }}</span>
                           <Icon type="arrow-down-b"></Icon>
                       </a>
                       <DropdownMenu slot="list">
-                          <DropdownItem name="ownSpace">个人中心</DropdownItem>
                           <DropdownItem name="ownSpace">项目地址</DropdownItem>
                           <DropdownItem name="loginout" divided>退出登录</DropdownItem>
                       </DropdownMenu>
@@ -46,16 +45,20 @@
 import SliderMenu from '@/views/components/slider-menu/sliderMenu'
 import Logo from '@/views/components/logo/logo'
 import {appRouter } from "@/router/router"
-
+import Cookies from 'js-cookie';
 export default {
   data () {
     return {
       menuList: appRouter,
+      username: '',
       openNamesArr : []  // 默认打开的
     }
   },
   created () {
     this.openNamesArr.push(this.$route.matched[0].name); // 设置默认打开的下拉框
+
+    // 拿到用户名
+    this.username = Cookies.get('user')
   },
   methods: {
     changeMenu (name) {

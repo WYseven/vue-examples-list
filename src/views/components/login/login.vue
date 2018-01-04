@@ -43,6 +43,7 @@
 <script>
 // import Cookies from 'js-cookie';
 import {loginMethod} from '@/methodsApi'
+import Cookies from 'js-cookie';
 export default {
     data () {
         return {
@@ -69,7 +70,12 @@ export default {
                         password:  this.form.password
                     }).then((params) => {
                         if(params.data.code === 0){
-                            this.$router.push('/base-examples')
+                            Cookies.set('user',this.form.userName)
+                            this.$router.push({
+                                name: 'base-examples'
+                            })
+                            this.$store
+                            // 提交cookie
                         }else if(params.data.code === 1) {
                             this.$Notice.warning({
                                 title: '提醒',
